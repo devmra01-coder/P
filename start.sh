@@ -13,14 +13,14 @@ if [ -z "${SECRET:-}" ]; then
     exit 1
 fi
 
-PORT="${PORT:-443}"
+PORT="${PORT:-24323}"
 WORKERS="${WORKERS:-1}"
 
 echo ""
 echo "======================================"
 echo "MTProto Proxy starting..."
 echo "======================================"
-echo "Internal port: $PORT"
+echo "Listening port: $PORT"
 echo "Workers: $WORKERS"
 
 if [ -n "${RAILWAY_TCP_PROXY_DOMAIN:-}" ] && [ -n "${RAILWAY_TCP_PROXY_PORT:-}" ]; then
@@ -32,10 +32,9 @@ fi
 
 exec ./objs/bin/mtproto-proxy \
     -u nobody \
-    -p 8888 \
-    -H "$PORT" \
+    -p "$PORT" \
     -S "$SECRET" \
     --aes-pwd proxy-secret \
-    proxy-multi.conf \
+    proxy-multi.conf \ 
     -M "$WORKERS" \
     -P "$PROXY_TAG"
