@@ -37,4 +37,5 @@ exec ./objs/bin/mtproto-proxy \
     -S "$SECRET" \
     --aes-pwd proxy-secret \
     proxy-multi.conf \
-    -M "$WORKERS"
+    -M "$WORKERS" \
+    -P "$PROXY_TAG"
